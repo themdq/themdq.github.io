@@ -39,6 +39,29 @@ jobs:
           # ruby-version: '3.1' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Install AWS CLI
+        run: sudo apt-get install -y awscli
+
+      - name: Download posts from R2
+        run: |
+          aws s3 sync s3://$R2_BUCKET/posts ./_posts \
+            --endpoint-url $R2_ENDPOINT \
+            --exact-timestamps
+      - name: Install Node.js and dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install filter dependencies
+        run: npm install
+      - name: Filter posts by frontmatter
+        run: npm run filter-posts
+
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
