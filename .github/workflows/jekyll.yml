@@ -45,8 +45,8 @@ jobs:
 
       - name: Download posts from R2
         run: |
-          aws s3 sync s3://$R2_BUCKET/posts ./_posts \
-            --endpoint-url $R2_ENDPOINT \
+          aws s3api sync --endpoint-url $R2_ENDPOINT \
+            --bucket $R2_BUCKET \
             --exact-timestamps
       - name: Install Node.js and dependencies
         uses: actions/setup-node@v3
