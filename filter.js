@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const fm = require("front-matter");
 
-const sourceDir = "./posts_raw";
-const targetDir = "./_posts";
+const sourceDir = "./_notes_raw";
+const targetDir = "./_notes";
 
 // Очистить _posts
 fs.rmSync(targetDir, { recursive: true, force: true });
