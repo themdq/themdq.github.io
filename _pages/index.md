@@ -5,7 +5,7 @@ id: home
 permalink: /
 ---
 
-<strong>Recently updated notes</strong>
+Недавно обновленные статьи:
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
@@ -15,9 +15,3 @@ permalink: /
     </li>
   {% endfor %}
 </ul>
-
-<style>
-  .wrapper {
-    max-width: 46em;
-  }
-</style>
