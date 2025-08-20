@@ -45,14 +45,19 @@ jobs:
 
       - name: Download posts from R2
         run: |
-          aws s3 sync s3://$R2_BUCKET/ ./_notes\
+          aws s3 sync s3://$R2_BUCKET/ ./_notes_raw\
             --endpoint-url $R2_ENDPOINT
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
-
+      - name: Move images
+        run: | 
+          rm -rf ./notes && \
+          rm -rf ./assets && \
+          mv ./_notes_raw/assets ./assets && \
+          mv ./notes_raw ./notes
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
