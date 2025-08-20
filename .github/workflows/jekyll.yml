@@ -54,10 +54,10 @@ jobs:
           R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
       - name: Move images
         run: | 
-          rm -rf ./notes && \
+          rm -rf ./_notes && \
           rm -rf ./assets && \
           mv ./_notes_raw/assets ./assets && \
-          mv ./notes_raw ./notes
+          mv ./_notes_raw ./_notes
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
