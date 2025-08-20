@@ -58,6 +58,11 @@ jobs:
           rm -rf ./assets && \
           mv ./_notes_raw/assets ./assets && \
           mv ./_notes_raw ./_notes
+      - name: Run obsidian -> img replacer (Ruby)
+        run: |
+          ruby --version
+          chmod +x scripts/convert_obsidian_images.rb
+          ruby scripts/convert_obsidian_images.rb
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
