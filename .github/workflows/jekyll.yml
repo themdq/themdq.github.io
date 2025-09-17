@@ -55,8 +55,7 @@ jobs:
       - name: Move images
         run: | 
           rm -rf ./_notes && \
-          rm -rf ./assets && \
-          mv ./_notes_raw/assets ./assets && \
+          mv ./_notes_raw/assets/* ./assets && \
           mv ./_notes_raw ./_notes
       - name: Run obsidian -> img replacer (Ruby)
         run: |
@@ -86,3 +85,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+#rm -rf ./assets && \
